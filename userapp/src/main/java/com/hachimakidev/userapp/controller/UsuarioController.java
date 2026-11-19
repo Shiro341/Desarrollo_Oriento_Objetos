@@ -5,5 +5,8 @@ import com.hachimakidev.userapp.dao.UsuarioDAO;
 public class UsuarioController {
     
     private UsuarioDAO usuarioDAO;
+
+
+    
     
 }
