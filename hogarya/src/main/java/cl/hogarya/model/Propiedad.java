@@ -25,16 +25,41 @@ public abstract class Propiedad {
     public abstract int calcularPagoMensual();
     public abstract String getDetalle();
 
+    // Getter puente para TableView: PropertyValueFactory("pagoMensual")
+    public int getPagoMensual() {
+        return calcularPagoMensual();
+    }
+
     // --- Getters y setters comunes ---
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getDireccion() { return direccion; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getArriendoBase() { return arriendoBase; }
-    public void setArriendoBase(int arriendoBase) { this.arriendoBase = arriendoBase; }
+    public String getDireccion() {
+        return direccion;
+    }
 
-    public int getMetrosCuadrados() { return metrosCuadrados; }
-    public void setMetrosCuadrados(int metrosCuadrados) { this.metrosCuadrados = metrosCuadrados; }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getArriendoBase() {
+        return arriendoBase;
+    }
+
+    public void setArriendoBase(int arriendoBase) {
+        this.arriendoBase = arriendoBase;
+    }
+
+    public int getMetrosCuadrados() {
+        return metrosCuadrados;
+    }
+
+    public void setMetrosCuadrados(int metrosCuadrados) {
+        this.metrosCuadrados = metrosCuadrados;
+    }
 }

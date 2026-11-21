@@ -1,3 +1,4 @@
+
 package cl.hogarya.dao;
 
 import java.sql.Connection;
@@ -28,6 +29,7 @@ public class PropiedadDAO {
 
             if (propiedad instanceof Casa miCasa) {
 
+
                 ps.setInt(5, miCasa.getCantidadPisos());
                 ps.setInt(6, miCasa.isTienePatio() ? 1 : 0);
 
@@ -35,6 +37,7 @@ public class PropiedadDAO {
                 ps.setNull(8, Types.INTEGER);
 
             } else if (propiedad instanceof Departamento miDepartamento) {
+
 
                 ps.setNull(5, Types.INTEGER);
                 ps.setNull(6, Types.INTEGER);
@@ -93,7 +96,7 @@ public class PropiedadDAO {
             }
 
         } catch (SQLException | IllegalArgumentException e) {
-            System.out.println("Error al guardar la propiedad: " + e.getMessage());
+            System.out.println("Error al obtener las propiedades: " + e.getMessage());
 
         }
 
@@ -101,26 +104,30 @@ public class PropiedadDAO {
 
     }
 
-    public boolean actualizar(Propiedad propiedad){
+    public boolean actualizar(Propiedad propiedad) {
 
         String SQL = "UPDATE propiedades SET tipo = ?, direccion = ?, arriendo_base = ?, metros_cuadrados = ?, cantidad_pisos = ?, tiene_patio = ?, numero_piso = ?, gastos_comunes = ? WHERE id = ?";
 
         try (Connection conn = ConexionDB.getConnection();
-        PreparedStatement ps = conn.prepareStatement(SQL)){
-            
+                PreparedStatement ps = conn.prepareStatement(SQL)) {
+
             ps.setString(1, propiedad.getTipo());
             ps.setString(2, propiedad.getDireccion());
             ps.setInt(3, propiedad.getArriendoBase());
             ps.setInt(4, propiedad.getMetrosCuadrados());
             ps.setInt(9, propiedad.getId());
 
-            if (propiedad instanceof Casa actulizarCasa){
+            if (propiedad instanceof Casa actulizarCasa) {
+
+
                 ps.setInt(5, actulizarCasa.getCantidadPisos());
-                ps.setInt(6, actulizarCasa.isTienePatio() ? 1:0);
+                ps.setInt(6, actulizarCasa.isTienePatio() ? 1 : 0);
                 ps.setNull(7, Types.INTEGER);
                 ps.setNull(8, Types.INTEGER);
 
             } else if (propiedad instanceof Departamento actualizarDepartamento) {
+
+
                 ps.setNull(5, Types.INTEGER);
                 ps.setNull(6, Types.INTEGER);
                 ps.setInt(7, actualizarDepartamento.getNumeroPiso());
@@ -129,36 +136,36 @@ public class PropiedadDAO {
             } else {
                 throw new IllegalArgumentException("Tipo de propiedad no válida");
             }
-            
+
             int filasAfectadas = ps.executeUpdate();
 
             return filasAfectadas > 0;
 
         } catch (SQLException | IllegalArgumentException e) {
-            System.err.println("Error al actulizar la propiedad");
+            System.err.println("Error al actualizar la propiedad: " + e.getMessage());
             return false;
         }
 
     }
 
-    public boolean eliminar(int id){
+    public boolean eliminar(int id) {
 
         String SQL = "DELETE FROM propiedades WHERE id = ?";
 
         try (Connection conn = ConexionDB.getConnection();
-        PreparedStatement ps = conn.prepareStatement(SQL)){
+                PreparedStatement ps = conn.prepareStatement(SQL)) {
 
             ps.setInt(1, id);
 
             int filasAfectadas = ps.executeUpdate();
 
-            return filasAfectadas > 0;  
-            
+            return filasAfectadas > 0;
+
         } catch (SQLException e) {
             System.err.println("Error al eliminar");
             return false;
 
-        }   
+        }
 
     }
 

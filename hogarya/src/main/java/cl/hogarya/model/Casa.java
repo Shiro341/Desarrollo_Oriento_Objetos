@@ -2,8 +2,6 @@ package cl.hogarya.model;
 
 public class Casa extends Propiedad {
 
-    private static final double RECARGO_PATIO = 0.10;   // ← ajusta si tu pauta pide otro %
-
     private int cantidadPisos;
     private boolean tienePatio;
 
@@ -28,8 +26,8 @@ public class Casa extends Propiedad {
 
     @Override
     public int calcularPagoMensual() {
-        int recargo = tienePatio ? (int) Math.round(arriendoBase * RECARGO_PATIO) : 0;
-        return arriendoBase + recargo;
+        // Según la guía del Proyecto 2, Casa retorna solo el arriendoBase.
+        return getArriendoBase();
     }
 
     @Override
@@ -37,9 +35,19 @@ public class Casa extends Propiedad {
         return cantidadPisos + " piso(s) · " + (tienePatio ? "con patio" : "sin patio");
     }
 
-    public int getCantidadPisos() { return cantidadPisos; }
-    public void setCantidadPisos(int cantidadPisos) { this.cantidadPisos = cantidadPisos; }
+    public int getCantidadPisos() {
+        return cantidadPisos;
+    }
 
-    public boolean isTienePatio() { return tienePatio; }
-    public void setTienePatio(boolean tienePatio) { this.tienePatio = tienePatio; }
+    public void setCantidadPisos(int cantidadPisos) {
+        this.cantidadPisos = cantidadPisos;
+    }
+
+    public boolean isTienePatio() {
+        return tienePatio;
+    }
+
+    public void setTienePatio(boolean tienePatio) {
+        this.tienePatio = tienePatio;
+    }
 }
